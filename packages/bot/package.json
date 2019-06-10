@@ -1,0 +1,27 @@
+{
+  "name": "@stock-bot-sdk/bot",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Steffan <skbrown333@gmail.com>",
+  "homepage": "https://github.com/skbrown333/stock-bot#readme",
+  "license": "ISC",
+  "main": "lib/bot.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skbrown333/stock-bot.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "tsc": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/skbrown333/stock-bot/issues"
+  }
+}
