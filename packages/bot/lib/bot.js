@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const modules_1 = require("@stock-bot/modules");
+console.log("IEXService: ", modules_1.default);
 function test() {
     return __awaiter(this, void 0, void 0, function* () {
-        let s = yield modules_1.IEXService.getSymboleQuote("aapl");
+        let s = yield modules_1.default.getSymbolQuote("aapl");
         console.log(s);
     });
 }
