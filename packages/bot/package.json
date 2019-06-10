@@ -20,7 +20,7 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "tsc": "tsc",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/bot.ts"
   },
   "bugs": {
     "url": "https://github.com/skbrown333/stock-bot/issues"
