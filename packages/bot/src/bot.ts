@@ -1,9 +1,8 @@
-import { asd } from "@stock-bot/modules";
-console.log("asd: ", new asd("sad"));
+import { IEXService } from "@stock-bot/modules";
 
 async function test() {
-  // let s = await IEXService.getSymbolQuote("aapl");
-  //  console.log(s);
+  let s = await new IEXService().getSymbolQuote("aapl", null);
+  console.log(s);
 }
 
 console.log("Hello World");
