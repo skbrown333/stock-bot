@@ -1,3 +1,6 @@
-import IEXService from "./Services/IEXService";
-
-export default "hello world";
+export { IEXService } from "./Services/IEXService";
+export class asd {
+  constructor(public name: String) {
+    this.name = "steffan";
+  }
+}
