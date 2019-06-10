@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/skbrown333/stock-bot/issues"
   },
-  "gitHead": "b5c2a036a4e9b0935e4eae27778a08d2d5ce056d",
+  "gitHead": "7e3a9eced7ab064560e68f7f0e42e54882ceb60f",
   "dependencies": {
     "@types/axios": "^0.14.0",
     "axios": "^0.19.0"
