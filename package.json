@@ -8,5 +8,20 @@
   },
   "scripts": {
     "publish": "lerna run tsc && lerna publish"
-  }
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skbrown333/stock-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skbrown333/stock-bot/issues"
+  },
+  "homepage": "https://github.com/skbrown333/stock-bot#readme",
+  "description": ""
 }
