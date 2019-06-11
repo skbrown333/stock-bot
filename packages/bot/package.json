@@ -1,6 +1,6 @@
 {
   "name": "@stock-bot/bot",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "> TODO: description",
   "author": "Steffan <skbrown333@gmail.com>",
   "homepage": "https://github.com/skbrown333/stock-bot#readme",
@@ -27,7 +27,7 @@
   },
   "gitHead": "6b5fadb21d5f1a5c549b06020855b515eefdd977",
   "dependencies": {
-    "@stock-bot/modules": "^0.0.12",
+    "@stock-bot/modules": "^0.0.13",
     "@types/axios": "^0.14.0",
     "axios": "^0.19.0"
   },

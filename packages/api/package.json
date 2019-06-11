@@ -1,6 +1,6 @@
 {
   "name": "@stock-bot/api",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "> TODO: description",
   "author": "Steffan <skbrown333@gmail.com>",
   "homepage": "https://github.com/skbrown333/stock-bot/tree/master/packages/api#readme",
@@ -26,7 +26,7 @@
     "url": "https://github.com/skbrown333/stock-bot/issues"
   },
   "dependencies": {
-    "@stock-bot/modules": "^0.0.12",
+    "@stock-bot/modules": "^0.0.13",
     "express": "^4.17.1",
     "mongoose": "^5.5.14",
     "morgan": "^1.9.1",
