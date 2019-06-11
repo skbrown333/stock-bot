@@ -1,8 +1,12 @@
-import { IEXService } from "@stock-bot/modules";
+import axios from "axios";
 
 async function test() {
-  let s = await IEXService.getSymbolQuote("aapl", null);
-  console.log(s);
+  try {
+    let symbols = await axios.get("http://localhost:3000/aapl");
+    console.log(symbols.data);
+  } catch (e) {
+    console.log("e: ", e);
+  }
 }
 
 test();
