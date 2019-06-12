@@ -1,4 +1,4 @@
 export interface Service {
   getAllSymbols: Function;
-  getSymbolQuote: Function;
+  getSymbolPrice: Function;
 }
