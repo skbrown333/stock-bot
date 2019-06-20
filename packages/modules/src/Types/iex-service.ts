@@ -1,4 +1,4 @@
-export interface Service {
+export interface IEXServiceInterface {
   getAllSymbols: Function;
   getSymbolPrice: Function;
 }

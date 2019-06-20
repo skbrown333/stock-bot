@@ -1,9 +1,9 @@
 import axios from "./axios.instance";
 
 /* Types */
-import { Service } from "../Types/service";
+import { IEXServiceInterface } from "../Types/iex-service";
 
-class IEXService implements Service {
+class IEXService implements IEXServiceInterface {
   constructor() {}
 
   async getAllSymbols() {
