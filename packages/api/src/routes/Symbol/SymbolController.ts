@@ -16,7 +16,7 @@ class SymbolController implements ISymbolController {
   async getPrice(req, res) {
     let symbol = req.params.symbol;
     let price = await IEXService.getSymbolPrice(symbol, null);
-    res.send({ price: price });
+    res.send({ value: price });
   }
 
   async getHistorical(req, res) {
@@ -36,6 +36,7 @@ class SymbolController implements ISymbolController {
 
   async purchaseSymbol(req, res) {
     let symbol = req.params.symbol;
+
     let order = await AlpacaService.requestMarketOrder(symbol, null);
     console.log("order: ", order);
     let purchasePrice = await IEXService.getSymbolPrice(symbol, null);
@@ -78,14 +79,22 @@ class SymbolController implements ISymbolController {
 
   async getPosition(req, res) {
     let symbol = req.params.symbol;
-    let position = await AlpacaService.getPosition(symbol);
-    res.send(position);
+    try {
+      let position = await AlpacaService.getPosition(symbol);
+      res.send(position);
+    } catch {
+      res.send(null);
+    }
   }
 
   async getOrder(req, res) {
     let id = req.params.order;
-    let order = await AlpacaService.getOrder(id);
-    res.send(order);
+    try {
+      let order = await AlpacaService.getOrder(id);
+      res.send(order);
+    } catch {
+      res.send(null);
+    }
   }
 }
 

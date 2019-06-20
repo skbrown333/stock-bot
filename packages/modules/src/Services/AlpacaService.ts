@@ -1,9 +1,27 @@
-import axios from "axios";
+import axiosLib from "axios";
+
+const baseUrl = "https://paper-api.alpaca.markets/v2";
+
+const axios = axiosLib.create({
+  baseURL: baseUrl,
+  timeout: 300000
+});
+
+// Add a response interceptor
+axios.interceptors.response.use(
+  function(response) {
+    // Do something with response data
+    return response;
+  },
+  function(error) {
+    console.log("error: ", error);
+    // Do something with the response error
+    return Promise.reject();
+  }
+);
 
 /* Types */
 import { AlpacaServiceInterface } from "../Types/alpaca-service";
-
-const baseUrl = "https://paper-api.alpaca.markets/v2";
 
 class AlpacaService implements AlpacaServiceInterface {
   constructor() {}
@@ -20,7 +38,7 @@ class AlpacaService implements AlpacaServiceInterface {
       stop_price: null
     };
 
-    let res = await axios.post(`${baseUrl}/orders`, body, {
+    let res = await axios.post(`/orders`, body, {
       headers: {
         "APCA-API-KEY-ID": "PKMEQY0XYEPNVVRG9KEE",
         "APCA-API-SECRET-KEY": "xFnT9wC0t6skGfxQmric7tKtzYNL2lNIVvuEJsKO"
@@ -30,7 +48,7 @@ class AlpacaService implements AlpacaServiceInterface {
   }
 
   async getPosition(symbol: string) {
-    let res = await axios.get(`${baseUrl}/positions/${symbol.toUpperCase()}`, {
+    let res = await axios.get(`/positions/${symbol.toUpperCase()}`, {
       headers: {
         "APCA-API-KEY-ID": "PKMEQY0XYEPNVVRG9KEE",
         "APCA-API-SECRET-KEY": "xFnT9wC0t6skGfxQmric7tKtzYNL2lNIVvuEJsKO"
@@ -40,7 +58,7 @@ class AlpacaService implements AlpacaServiceInterface {
   }
 
   async getOrder(_id: string) {
-    let res = await axios.get(`${baseUrl}/orders/${_id}`, {
+    let res = await axios.get(`/orders/${_id}`, {
       headers: {
         "APCA-API-KEY-ID": "PKMEQY0XYEPNVVRG9KEE",
         "APCA-API-SECRET-KEY": "xFnT9wC0t6skGfxQmric7tKtzYNL2lNIVvuEJsKO"

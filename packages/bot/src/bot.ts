@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios.instance";
 
 let symbols = [
   "aapl",
@@ -14,42 +14,37 @@ let symbols = [
 
 async function tick() {
   symbols.forEach(async s => {
-    let purchased: any = await axios.post(
-      `http://localhost:3000/symbol/purchased`,
-      { symbol: s }
-    );
-    purchased = purchased.data;
-    let price: any = await axios.get(`http://localhost:3000/symbol/${s}`);
-    price = price.data.price;
-    let position: any;
     try {
-      position = await axios.get(`http://localhost:3000/symbol/${s}/position`);
-    } catch {
-      position = null;
-    }
-    let order: any = null;
-    try {
+      let purchased: any = await axios.post(`/symbol/purchased`, { symbol: s });
+      let price: any = await axios.get(`/symbol/${s}`);
+      let position: any = await axios.get(`/symbol/${s}/position`);
+      let order: any = null;
+
+      // TODO:
+      if (position && !purchased) {
+      }
+
       if (purchased && purchased.order) {
-        order = await axios.get(
-          `http://localhost:3000/symbol/order/${purchased.order}`
-        );
+        order = await axios.get(`/symbol/order/${purchased.order}`);
       }
-    } catch {}
 
-    if (order) console.log(order);
+      if (order) console.log(order);
 
-    if (position && position.qty && purchased) {
-      if (purchased.purchase_price < price.price) {
-        console.log("selling");
-        await axios.post(`http://localhost:3000/symbol/${s}/sell`);
+      if (position && position.qty && purchased) {
+        if (purchased.purchase_price < price.value) {
+          console.log("Selling: ", s);
+          await axios.post(`/symbol/${s}/sell`);
+        }
+      } else if ((!position || !position.qty) && !order) {
+        if (!purchased || purchased.purchase_price > price.value) {
+          console.log("Buying: ", s);
+          await axios.post(`/symbol/${s}/purchase`);
+        }
       }
-    } else if ((!position || !position.qty) && !order) {
-      if (!purchased || purchased.purchase_price > price.price) {
-        console.log("buying");
-        await axios.post(`http://localhost:3000/symbol/${s}/purchase`);
-      }
+    } catch {
+      console.log("Failed to act on: ", s);
     }
   });
 }
 
-setInterval(tick, 1000);
+setInterval(tick, 5000);
