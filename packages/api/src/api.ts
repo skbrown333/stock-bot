@@ -47,4 +47,4 @@ app.use(
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use("/symbol", routes);
+app.use("/", routes);
