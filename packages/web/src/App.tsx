@@ -44,6 +44,17 @@ class App extends React.Component<any> {
     <div className="app">
       <div className="header"></div>
       <div className='app-body'>
+        {/* <div className="modal">
+          <div className="modal__main">
+            <div className="modal__header">Options</div>
+            <div className="modal__open-bracket">{'{'}</div>
+            <code className="modal__option-label">type: <span>stop_limit</span></code>
+            <code className="modal__option-label">stop_price: <span>23.60</span></code>
+            <code className="modal__option-label">limit_price: <span>23.60</span></code>
+            <code className="modal__option-label">time_in_force: <span>day</span></code>
+            <div className="modal__close-bracket">{'}'}</div>
+          </div>
+        </div> */}
         <div className="app-body__main">
           <div className="app-body__detail">
             <div className="card__header">Detail</div>
