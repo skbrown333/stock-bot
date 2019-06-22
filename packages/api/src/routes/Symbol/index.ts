@@ -11,8 +11,10 @@ router.get("/:symbol", wrapAsync(SymbolController.getPrice));
 router.get("/:symbol/position", wrapAsync(SymbolController.getPosition));
 router.get("/:symbol/quote", wrapAsync(SymbolController.getQuote));
 router.post("/:symbol/historical", SymbolController.getHistorical);
-router.post("/:symbol/purchase", wrapAsync(SymbolController.purchaseSymbol));
-router.post("/:symbol/sell", wrapAsync(SymbolController.sellSymbol));
+router.post(
+  "/:symbol/transaction",
+  wrapAsync(SymbolController.symbolTransaction)
+);
 
 logRoutes("/symbol", router);
 router.use(handleError);

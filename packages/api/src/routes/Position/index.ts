@@ -1,15 +1,14 @@
 import express from "express";
 import { handleError } from "../../utils/utils";
-import OrderController from "./OrderController";
+import PositionController from "./PositionController";
 import { wrapAsync } from "../../utils/utils";
 import { logRoutes } from "../../utils/logging";
 
 const router = express.Router();
 
-router.get("/", wrapAsync(OrderController.getOrders));
-router.get("/:order", wrapAsync(OrderController.getOrder));
+router.get("/", wrapAsync(PositionController.getPositions));
 
-logRoutes("/orders", router);
+logRoutes("/positions", router);
 router.use(handleError);
 
 export default router;

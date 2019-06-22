@@ -1,0 +1,21 @@
+@import '../../styles/colors';
+@import '../../styles/card';
+
+.symbol-card {
+  @extend .card;
+  margin: 4px;
+  font-size: 14pt;
+
+  &__symbol {
+    color: $color-black;
+    font-weight: 600;
+  }
+
+  &__change {
+    color: $color-green;
+  }
+
+  &__change--negative {
+    color: $color-red;
+  }
+}

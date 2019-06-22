@@ -13,8 +13,7 @@ interface ISymbolController {
   getPurchased: Function;
   getHistorical: Function;
   getQuote: Function;
-  purchaseSymbol: Function;
-  sellSymbol: Function;
+  symbolTransaction: Function;
 }
 
 class SymbolController implements ISymbolController {
@@ -57,41 +56,23 @@ class SymbolController implements ISymbolController {
     res.send(quote);
   }
 
-  async purchaseSymbol(req, res) {
+  async symbolTransaction(req, res) {
     let symbol = req.params.symbol;
+    let body = req.body;
 
-    let order = await alpaca.requestMarketOrder(symbol, null);
-    console.log("order: ", order);
-    let purchasePrice = await iex.getSymbolPrice(symbol, null);
+    await alpaca.requestMarketOrder(symbol, body);
 
-    let model = await Symbol.findOne({ symbol });
-    if (!model) {
-      let stock = await iex.getSymbolQuote(symbol, null);
-      let purchaseDate = new Date().toDateString();
-      let newModel = await Symbol.create({
-        symbol: stock.symbol.toLowerCase(),
-        name: stock.companyName,
-        purchase_date: purchaseDate,
-        purchase_price: purchasePrice,
-        order: order
-      });
-
-      res.send(newModel);
-      return;
-    }
+    let stock = await iex.getSymbolQuote(symbol, null);
+    let model = await Symbol.create({
+      symbol: stock.symbol.toLowerCase(),
+      name: stock.companyName,
+      date: new Date().toDateString(),
+      price: body.stop_price,
+      side: req.body.side
+    });
 
     res.send(model);
-  }
-
-  async sellSymbol(req, res) {
-    let symbol = req.params.symbol;
-    let position = await alpaca.getPosition(symbol);
-    let order = await alpaca.requestMarketOrder(req.params.symbol, {
-      side: "sell",
-      qty: position.qty
-    });
-    await Symbol.findOneAndUpdate({ symbol }, { order: order });
-    res.send(order);
+    return;
   }
 }
 

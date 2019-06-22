@@ -7,6 +7,7 @@ const alpaca = new AlpacaService({
 
 interface IOrderController {
   getOrder: Function;
+  getOrders: Function;
 }
 
 class OrderController implements IOrderController {
@@ -20,6 +21,11 @@ class OrderController implements IOrderController {
     } catch {
       res.send(null);
     }
+  }
+
+  async getOrders(req, res) {
+    let orders = await alpaca.getOrders();
+    res.send(orders);
   }
 }
 

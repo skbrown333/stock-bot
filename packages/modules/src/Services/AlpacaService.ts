@@ -33,27 +33,25 @@ export default class AlpacaService implements AlpacaServiceInterface {
   }
 
   async requestMarketOrder(symbol: string, params: any) {
-    const side = params && params.side ? params.side : "buy";
-    const body = {
-      symbol: symbol.toLocaleUpperCase(),
-      qty: params && params.qty ? params.qty : 1,
-      side: side,
-      type: "market",
-      time_in_force: "day",
-      limit_price: null,
-      stop_price: null
-    };
-
-    let res = await axios.post(`/orders`, body, {
+    let res = await axios.post(`/orders`, params, {
       headers: this.headers
     });
     return res.data;
   }
 
   async getPosition(symbol: string) {
-    let res = await axios.get(`/positions/${symbol.toUpperCase()}`, {
-      headers: this.headers
-    });
+    try {
+      let res = await axios.get(`/positions/${symbol.toUpperCase()}`, {
+        headers: this.headers
+      });
+      return res.data;
+    } catch {
+      return null;
+    }
+  }
+
+  async getPositions() {
+    let res = await axios.get("/positions", { headers: this.headers });
     return res.data;
   }
 
@@ -61,6 +59,11 @@ export default class AlpacaService implements AlpacaServiceInterface {
     let res = await axios.get(`/orders/${_id}`, {
       headers: this.headers
     });
+    return res.data;
+  }
+
+  async getOrders() {
+    let res = await axios.get("/orders", { headers: this.headers });
     return res.data;
   }
 }
