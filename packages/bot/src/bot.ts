@@ -1,4 +1,3 @@
-import axios from "./axios.instance";
 import { CoreService } from "@stock-bot/modules";
 
 const coreService = new CoreService();
@@ -30,7 +29,6 @@ async function tick() {
   symbols.forEach(async s => {
     try {
       let price: any = await coreService.getSymbolPrice(s);
-      price = price.value;
       let order: any = fetchSymbolFromList(orders, s);
       let position: any = fetchSymbolFromList(positions, s);
 

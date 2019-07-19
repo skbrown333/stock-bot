@@ -24,7 +24,7 @@ class OrderController implements IOrderController {
   }
 
   async getOrders(req, res) {
-    let orders = await alpaca.getOrders();
+    let orders = await alpaca.getOrders(req.query);
     res.send(orders);
   }
 }

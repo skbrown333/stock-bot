@@ -12,19 +12,27 @@ const coreService = new CoreService();
 
 class App extends React.Component<any> {
   readonly state: any;
+
   constructor(props: any) {
     super(props);
 
     this.state = {
+      account: null,
       positions: [],
       symbols: []
     }
   }
 
   async componentDidMount() {
+    this.getData();
+
+  }
+
+  getData = async () => {
+    let account = await coreService.getAccount();
     let positions = await coreService.getPositions();
     let symbols = await this.makeSymbols(positions);
-    this.setState({positions, symbols});
+    this.setState({positions, symbols, account});
   }
 
   makeSymbols = async (positions: any) => {
@@ -38,7 +46,7 @@ class App extends React.Component<any> {
   }
 
   render() {
-    const { positions, symbols } = this.state;
+    const { account, positions, symbols } = this.state;
 
     return (
     <div className="app">
@@ -59,6 +67,7 @@ class App extends React.Component<any> {
           <div className="app-body__detail">
             <div className="card__header">Detail</div>
             <div className="app-body__chart">
+              {account ? <div>{account.equity}</div> : null}
               <LineChart data={{"2017-05-13": 2, "2017-05-14": 5, "2017-05-15": 2, "2017-05-16": 5}} height="250px" width="90%"></LineChart>
             </div>
           </div>

@@ -1,11 +1,13 @@
 import express from "express";
 import { handleError } from "../utils/utils";
+import { default as AccountRouter } from "./Account";
 import { default as SymbolRouter } from "./Symbol";
 import { default as OrderRouter } from "./Order";
 import { default as PositionRouter } from "./Position";
 
 const router = express.Router();
 
+router.use("/account", AccountRouter);
 router.use("/symbol", SymbolRouter);
 router.use("/orders", OrderRouter);
 router.use("/positions", PositionRouter);

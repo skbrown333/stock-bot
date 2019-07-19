@@ -17,7 +17,7 @@ export default class Transactions extends React.Component {
   }
 
   async componentDidMount() {
-    let orders = await coreService.getOrders();
+    let orders = await coreService.getOrders({status: 'all'});
     console.log('orders: ', orders);
     this.setState({orders})
   }

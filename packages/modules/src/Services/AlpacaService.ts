@@ -39,6 +39,13 @@ export default class AlpacaService implements AlpacaServiceInterface {
     return res.data;
   }
 
+  async getAccount() {
+    let res = await axios.get(`/account`, {
+      headers: this.headers
+    });
+    return res.data;
+  }
+
   async getPosition(symbol: string) {
     try {
       let res = await axios.get(`/positions/${symbol.toUpperCase()}`, {
@@ -62,8 +69,14 @@ export default class AlpacaService implements AlpacaServiceInterface {
     return res.data;
   }
 
-  async getOrders() {
-    let res = await axios.get("/orders", { headers: this.headers });
+  async getOrders(params?) {
+    let query = params ? `?` : "";
+    if (params) {
+      Object.keys(params).forEach(k => {
+        query += `${k}=${params[k]}`;
+      });
+    }
+    let res = await axios.get("/orders" + query, { headers: this.headers });
     return res.data;
   }
 }

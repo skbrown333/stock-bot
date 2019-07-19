@@ -21,8 +21,20 @@ axios.interceptors.response.use(
 export default class CoreService implements CoreServiceInterface {
   constructor() {}
 
-  async getOrders() {
-    let orders = await axios.get("/orders");
+  async getAccount() {
+    let account = await axios.get("/account");
+    return account;
+  }
+
+  async getOrders(params?) {
+    let query = params ? `?` : "";
+    if (params) {
+      Object.keys(params).forEach(k => {
+        query += `${k}=${params[k]}`;
+      });
+    }
+
+    let orders = await axios.get("/orders" + query);
     return orders;
   }
 
