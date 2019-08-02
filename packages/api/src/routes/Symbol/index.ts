@@ -7,7 +7,6 @@ import { logRoutes } from "../../utils/logging";
 const router = express.Router();
 
 router.post("/purchased", wrapAsync(SymbolController.getPurchased));
-router.get("/:symbol", wrapAsync(SymbolController.getPrice));
 router.get("/:symbol/position", wrapAsync(SymbolController.getPosition));
 router.get("/:symbol/quote", wrapAsync(SymbolController.getQuote));
 router.post("/:symbol/historical", SymbolController.getHistorical);
@@ -15,6 +14,8 @@ router.post(
   "/:symbol/transaction",
   wrapAsync(SymbolController.symbolTransaction)
 );
+router.get("/:symbol", wrapAsync(SymbolController.getPrice));
+
 
 logRoutes("/symbol", router);
 router.use(handleError);

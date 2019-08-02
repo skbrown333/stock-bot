@@ -1,0 +1,45 @@
+@import '../../styles/colors';
+@import '../../styles/card';
+
+
+.modal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, 0.6);
+  }
+
+  &__card {
+    @extend .card;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 350px;
+    max-width: 900px;
+    padding: 0;
+    border: none;
+  }
+
+  &__header {
+    @extend .card__header;
+    background-color: $color-black;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    color: $color-white;
+  }
+}

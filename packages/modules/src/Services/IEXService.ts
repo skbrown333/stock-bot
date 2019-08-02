@@ -18,10 +18,15 @@ export default class IEXService implements IEXServiceInterface {
   }
 
   async getSymbolPrice(symbol: string, filters: any) {
-    let query = filterToQuery(filters);
-    let url = `/stock/${symbol}/price?token=${this.token}`;
-    let res: any = await axios.get(url);
-    return res.data;
+    try {
+      let query = filterToQuery(filters);
+      let url = `/stock/${symbol}/price?token=${this.token}`;
+      let res: any = await axios.get(url);
+      return res.data;
+    } catch (err) {
+      return err;
+    }
+
   }
 
   async getHistorical(symbol: string, range: string, filters: any) {

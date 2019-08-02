@@ -3,7 +3,6 @@ import { CoreService } from "@stock-bot/modules";
 const coreService = new CoreService();
 
 let symbols = [
-  "lgcy",
   "amd",
   "qqq",
   "mlnt",

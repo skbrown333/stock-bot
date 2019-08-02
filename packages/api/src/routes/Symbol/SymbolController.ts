@@ -30,9 +30,10 @@ class SymbolController implements ISymbolController {
   }
 
   async getPrice(req, res) {
-    let symbol = req.params.symbol;
-    let price = await iex.getSymbolPrice(symbol, null);
-    res.send({ value: price });
+      let symbol = req.params.symbol;
+      let quote = await iex.getSymbolQuote(symbol, null);
+      res.send({ value: quote.latestPrice });
+
   }
 
   async getPurchased(req, res) {

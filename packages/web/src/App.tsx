@@ -7,6 +7,7 @@ import Transactions from './components/Transactions/transactions';
 //@ts-ignore
 import { LineChart } from 'react-chartkick';
 import 'chart.js';
+import Modal from "./components/Modal/modal";
 
 const coreService = new CoreService();
 
@@ -19,7 +20,8 @@ class App extends React.Component<any> {
     this.state = {
       account: null,
       positions: [],
-      symbols: []
+      symbols: [],
+      showModal: false
     }
   }
 
@@ -46,26 +48,32 @@ class App extends React.Component<any> {
   }
 
   render() {
-    const { account, positions, symbols } = this.state;
+    const { account, positions, symbols, showModal } = this.state;
 
     return (
     <div className="app">
       <div className="header"></div>
       <div className='app-body'>
-        {/* <div className="modal">
-          <div className="modal__main">
-            <div className="modal__header">Options</div>
-            <div className="modal__open-bracket">{'{'}</div>
-            <code className="modal__option-label">type: <span>stop_limit</span></code>
-            <code className="modal__option-label">stop_price: <span>23.60</span></code>
-            <code className="modal__option-label">limit_price: <span>23.60</span></code>
-            <code className="modal__option-label">time_in_force: <span>day</span></code>
-            <div className="modal__close-bracket">{'}'}</div>
-          </div>
-        </div> */}
+        <Modal 
+          header="Options" 
+          show={showModal} 
+          handleClose={() => {
+            this.setState({ showModal: false });
+          }}>
+          <div>hello</div>
+        </Modal>
         <div className="app-body__main">
           <div className="app-body__detail">
-            <div className="card__header">Detail</div>
+            <div className="card__header">
+              Detail
+              <i 
+                className="material-icons" 
+                onClick={() => {
+                  this.setState({showModal: true})
+                }}>
+                  build
+              </i>
+            </div>
             <div className="app-body__chart">
               {account ? <div>{account.equity}</div> : null}
               <LineChart data={{"2017-05-13": 2, "2017-05-14": 5, "2017-05-15": 2, "2017-05-16": 5}} height="250px" width="90%"></LineChart>
