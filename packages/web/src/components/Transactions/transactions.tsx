@@ -7,42 +7,53 @@ const coreService = new CoreService();
 
 export default class Transactions extends React.Component {
   readonly state: any;
+  interval: any;
 
   constructor(props: any) {
     super(props);
 
     this.state = {
       orders: [],
+      isLoading: false
     }
   }
 
   async componentDidMount() {
-    let orders = await coreService.getOrders({status: 'all'});
-    console.log('orders: ', orders);
-    this.setState({orders})
+    this.interval = setInterval(this.getOrders, 1000);
   }
 
-  getOrders = () => {
-    let orders = this.state.orders;
+  componentWillUnmount = () => {
+    clearInterval(this.interval);
+  }
 
-    if(!orders.length) return orders;
+  getOrders = async () => {
+    if(this.state.isLoading) return;
+    this.setState({ isLoading: true }, async () => {
+      let orders: any = await coreService.getOrders({status: 'all'});
 
-    return orders.map((o: any) => {
-      return (
-        <div key={o.id} className="transactions__order">
-          <span className='transactions__order__symbol'>{o.symbol}</span>
-          <span className={`transactions__order__side status--${o.status}`}>{o.side}</span>
-          <span className='transactions__order__price'>{o.stop_price}</span>
-        </div>
-      )
-    })
+      if(!orders.length) return orders;
+  
+      orders =  orders.map((o: any) => {
+        return (
+          <div key={o.id} className="transactions__order">
+            <span className='transactions__order__symbol'>{o.symbol}</span>
+            <span className={`transactions__order__side status--${o.status}`}>{o.side}</span>
+            <span className='transactions__order__price'>{o.stop_price}</span>
+          </div>
+        )
+      });
+      
+      this.setState({ orders, isLoading: false });
+    });
   }
 
   render() {
+    const { orders } = this.state;
+
     return (
       <div className="transactions">
         <div className="transactions__header">Orders</div>
-        <div className="transactions__orders">{this.getOrders()}</div>
+        <div className="transactions__orders">{orders}</div>
       </div> 
     )
   }

@@ -13,6 +13,7 @@ const coreService = new CoreService();
 
 class App extends React.Component<any> {
   readonly state: any;
+  interval: any;
 
   constructor(props: any) {
     super(props);
@@ -27,8 +28,11 @@ class App extends React.Component<any> {
   }
 
   async componentDidMount() {
-    this.getData();
-    let interval = setInterval(this.getData, 1000);
+    this.interval = setInterval(this.getData, 1000);
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.interval);
   }
 
   getData = async () => {
