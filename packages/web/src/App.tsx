@@ -21,20 +21,26 @@ class App extends React.Component<any> {
       account: null,
       positions: [],
       symbols: [],
-      showModal: false
+      showModal: false,
+      isLoading: false
     }
   }
 
   async componentDidMount() {
     this.getData();
-
+    let interval = setInterval(this.getData, 1000);
   }
 
   getData = async () => {
-    let account = await coreService.getAccount();
-    let positions = await coreService.getPositions();
-    let symbols = await this.makeSymbols(positions);
-    this.setState({positions, symbols, account});
+    const { isLoading } = this.state;
+    if(isLoading) return;
+
+    this.setState({isLoading: true}, async () => {
+      let account = await coreService.getAccount();
+      let positions = await coreService.getPositions();
+      let symbols = await this.makeSymbols(positions);
+      this.setState({positions, symbols, account, isLoading: false});
+    });
   }
 
   makeSymbols = async (positions: any) => {
